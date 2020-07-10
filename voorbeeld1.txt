@@ -1,0 +1,17 @@
+graaf voorbeeld1
+knooppunt a
+knooppunt b
+knooppunt c
+knooppunt d
+knooppunt e
+knooppunt f
+kant a,b,2
+kant a,e,4
+kant b,c,1
+kant b,f,7
+kant c,d,3
+kant c,f,6
+kant d,e,5
+kant d,f,2
+kant e,f,6
+Dijkstra a,f
