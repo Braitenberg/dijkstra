@@ -1,6 +1,6 @@
 // Alleen nodig voor Visual C++
-#define _CRT_SECURE_NO_WARNINGS
-#include "stdafx.h"
+//#define _CRT_SECURE_NO_WARNINGS
+//#include "stdafx.h"
 
 // Test programma voor class graaf_t
 #include <iostream>
@@ -10,7 +10,7 @@ using namespace std;
 #include "graaf_t.h"
 #include "Dijkstra_t.h"
 
-void main()
+int main()
 {
 	graaf_t			G ("Test");
 	kortste_pad_t	kortste_pad;
@@ -27,4 +27,6 @@ void main()
 	kortste_pad	= G.Dijkstra ("a", "c");
 	cout << "Kortste pad:\t\t" << kortste_pad.pad << "\n";
 	cout << "Lengte van dit pad:\t" << kortste_pad.lengte << "\n";
+
+	return 0;
 }

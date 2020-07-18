@@ -53,10 +53,9 @@ void	print_foutmelding (int regelnr, foutcode fout);
 
 // globale variabelen en objecten
 bool	graaf_gedefinieerd = false;
-graaf_t	G("");	// maak leeg graaf-object
+graaf_t	G(""); // maak leeg graaf-object
 
-int main()
-{
+int main() {
 	string		file_name, ingelezen_regel;
 	foutcode	error_no = OK;
 	int			  regel_nr = 0;
@@ -84,8 +83,8 @@ int main()
 	inFile.close();
 	return (error_no);
 }
-foutcode parse_regel(string arg_regel)
-{
+
+foutcode parse_regel(string arg_regel) {
 	size_t		i;
 	string		sleutelw, args;
 	foutcode	error_no = OK;
@@ -119,6 +118,7 @@ foutcode parse_regel(string arg_regel)
 	}
 	return error_no;
 }
+
 int zoek_sw(string arg_sw) {
 	// Hier invullen: code om index van sleutelwoord te vinden uit de array
 	int sw_index;
@@ -133,8 +133,7 @@ int zoek_sw(string arg_sw) {
 	return(sw_index);
 }
 
-foutcode parse_graaf(string args)
-{
+foutcode parse_graaf(string args) {
 	if (graaf_gedefinieerd)
 		return (ERROR_INVALID_KEYWORD);
 	else {
@@ -144,8 +143,7 @@ foutcode parse_graaf(string args)
 	}
 }
 
-foutcode parse_knooppunt(string args)
-{
+foutcode parse_knooppunt(string args) {
 	if (!graaf_gedefinieerd)
 		return (ERROR_KEYWORD_MISSING);
 	else {
@@ -153,8 +151,8 @@ foutcode parse_knooppunt(string args)
 		return (OK);
 	}
 }
-foutcode parse_kant(string args)
-{
+
+foutcode parse_kant(string args) {
 	string str_arg[4], rest;
 	size_t	i;
 	int		j=0;
@@ -191,14 +189,12 @@ foutcode parse_kant(string args)
 	return error_no;
 }
 
-foutcode parse_Dijkstra(string args)
-{
+foutcode parse_Dijkstra(string args) {
 	// Hier invullen: alle code voor de implementatie van deze functie
 	// Gebruik de code bij de functie parse_kant als voorbeeld.
 	return 0;
 }
 
-void print_foutmelding (int regelnr, foutcode fout)
-{
+void print_foutmelding (int regelnr, foutcode fout) {
 	cout << "Fout in regel " << regelnr << ": " << foutmelding[fout] << "\n";
 }
