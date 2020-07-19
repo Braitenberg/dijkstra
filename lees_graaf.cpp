@@ -31,9 +31,12 @@ const foutcode	OK						= 0,
 				ERROR_ARG_NOT_NUMERIC	= 4,
 				ERROR_FILE_NOT_EXIST	= 5,
 				ERROR_KEYWORD_MISSING	= 6;
+
 const foutcode	FATAL_ERROR = ERROR_FILE_NOT_EXIST;
 
-const int		NO_KEYWORDS = 4;
+const int	NO_KEYWORDS = 4;
+const int INVALID_KEYWORD_CODE = NO_KEYWORDS + 1; // -rb
+
 const string	sleutelwoorden[] =
 {
 	"graaf",
@@ -41,6 +44,7 @@ const string	sleutelwoorden[] =
 	"kant",
 	"Dijkstra"
 };
+
 const string	NUMERICALS = "0123456789";
 
 foutcode parse_regel		(string arg_regel);
@@ -52,8 +56,8 @@ int		zoek_sw (string arg_sw);
 void	print_foutmelding (int regelnr, foutcode fout);
 
 // globale variabelen en objecten
-bool	graaf_gedefinieerd = false;
-graaf_t	G(""); // maak leeg graaf-object
+bool graaf_gedefinieerd = false;
+graaf_t	G("naam"); // maak leeg graaf-object
 
 int main() {
 	string		file_name, ingelezen_regel;
@@ -89,31 +93,48 @@ foutcode parse_regel(string arg_regel) {
 	string		sleutelw, args;
 	foutcode	error_no = OK;
 
+	// i is de index van het scheidingsteken -rb
 	i = arg_regel.find (SCHEIDINGST1);
-	if (i!=string::npos)
+
+	if (i!=string::npos) // als het scheidingsteken is gevonden... -rb
 	{
 		// Hier invullen: splitsen van arg_regel in variabele sleutelw en variabele args
 		// U kunt hiervoor de functie assign gebruiken.
-		string sleutelw = arg_regel.assign(0, i);
-		string arg      = arg_regel.assign(i, string::npos);
+		string sleutelw;
+		string arg;
+
+		sleutelw.assign(arg_regel, 0, i);  //todo: ervoor zorgen dat dit geen segfault veroorzaakt
+		arg.assign     (arg_regel, i, string::npos);
 
 		// Start corresponderende functie om opdracht te parsen
 		// Hier invullen: case-statements
-		switch (zoek_sw(sleutelw)) {
+
+		int sw_num = zoek_sw(sleutelw);
+
+		switch (sw_num) {
 			case 0:
 				// hernoem de graaf -rb
 				G.zet_naam(arg);
+				break;
+
 			case 1:
 				// voeg_knooppunt_toe aan graaf -rb
 				parse_knooppunt(arg);
+				break;
+
 			case 2:
 				// voeg_kant_toe aan graaf -rb
 				parse_kant(arg);
+				break;
+
 			case 3:
 				// roep dijkstra aan op graaf -rb
 				parse_Dijkstra(arg);
-			default:
-				error_no = ERROR_INVALID_KEYWORD;
+				break;
+
+			 case INVALID_KEYWORD_CODE:
+				 error_no = ERROR_INVALID_KEYWORD;
+				 break;
 		}
 	}
 	return error_no;
@@ -121,10 +142,9 @@ foutcode parse_regel(string arg_regel) {
 
 int zoek_sw(string arg_sw) {
 	// Hier invullen: code om index van sleutelwoord te vinden uit de array
-	int sw_index;
-	int len_sleutelwoorden = 3;
+	int sw_index = INVALID_KEYWORD_CODE;
 	// een loop die de sleutelwoorden doorloopt -rb
-	for (int i=0; i < len_sleutelwoorden; i++) {
+	for (int i = 0; i < NO_KEYWORDS; i++) {
 		// als het sleutelwoord is gevonden, geef de index terug -rb
 		if (arg_sw == sleutelwoorden[i]) {
 			sw_index = i;
