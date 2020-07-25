@@ -1,5 +1,5 @@
-using namespace std;
 #include <string>
+using namespace std;
 
 const int MAX_AANT_KN = 100;
 const int ONEINDIG = 9999;
@@ -13,6 +13,7 @@ class graaf_t {
 
 	private :
 		int		aantal_kn;
+		int 	aantal_knt;
 		string	graaf_naam;
 		string	kn_labels [MAX_AANT_KN]; // string.h gebruiken in hoofdprogramma
 		int		matrix [MAX_AANT_KN][MAX_AANT_KN]; // tweedim. array, (rij, kolom)
