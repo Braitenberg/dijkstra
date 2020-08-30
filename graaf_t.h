@@ -25,5 +25,6 @@ class graaf_t {
 		void	voeg_kant_toe (string van_label, string naar_label, int gewicht);
 		int 	zoek_knooppunt (string arg_label);
 		void 	print_graaf ();
+		int * vind_kanten (int index);
 		kortste_pad_t dijkstra (string van_label, string naar_label); //todo: zou een kortste_pad_t moeten teruggeven
 };
