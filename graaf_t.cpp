@@ -1,11 +1,13 @@
-#include "graaf_t.h"
 #include <iostream>
+#include "graaf_t.h"
+#include "dijkstra_t.h"
+using namespace std;
 
 graaf_t::graaf_t(string arg_naam) {
   // Constructor bij deze objectklasse, initialiseert de interne
   // variabelen van een object (dus ook de verbindingsmatrix!).
+
   aantal_kn = 0;
-  aantal_knt = 0;
   graaf_naam = arg_naam;
 }
 
@@ -40,10 +42,8 @@ void graaf_t::voeg_knooppunt_toe (string arg_label) {
 void graaf_t::voeg_kant_toe (string van_label, string naar_label, int gewicht) {
   // Slaat het gewicht van de nieuwe kant op in de juiste
   // elementen van de verbindingsmatrix (dus tweemaal!).
-  matrix[aantal_knt][0] = gewicht;
-  matrix[aantal_knt][1] = zoek_knooppunt(van_label);
-  matrix[aantal_knt][2] = zoek_knooppunt(naar_label);
-  aantal_knt++;
+  matrix[zoek_knooppunt(van_label)][zoek_knooppunt(naar_label)] = gewicht;
+  matrix[zoek_knooppunt(naar_label)][zoek_knooppunt(van_label)] = gewicht;
 }
 
 void graaf_t::print_graaf() {
@@ -51,7 +51,7 @@ void graaf_t::print_graaf() {
   string knooppunten = "";
   string kanten      = "";
 
-  // formateer de knoopputen -rb
+  // formateer de knooppunten -rb
   for(int i = 0; i < aantal_kn; i++) {
     knooppunten += kn_labels[i];
     if (i != (aantal_kn - 1)) {
@@ -60,14 +60,14 @@ void graaf_t::print_graaf() {
   }
 
   // formateer de matrix -rb
-  for(int i = 0; i < aantal_knt; i++) {
-    for(int j = 0; j <= 3; j++) {
+  for(int i = 0; i < aantal_kn; i++) {
+    for(int j = 0; j < aantal_kn; j++) {
       kanten += to_string(matrix[i][j]);
       if (j != 3) {
         kanten += '\t';
       }
     }
-    if (i != (aantal_knt - 1)) {
+    if (i != (aantal_kn - 1)) {
       kanten += '\n';
     }
   }
@@ -78,8 +78,17 @@ void graaf_t::print_graaf() {
   cout << kanten << '\n';
 }
 
-int graaf_t::Dijkstra (string van_label, string naar_label) {
+kortste_pad_t graaf_t::dijkstra (string van_label, string naar_label) {
   // Vindt het kortste pad in de graaf van knooppunt van_label
   // naar knooppunt naar_label.
-  return 0; //todo: zou een kortste_pad_t moeten teruggeven
+  // dijkstra_t D(aantal_kn, van_label);
+
+  // vul de tabel
+  // voor ieder knooppunt, bereken de afstand tussen het knooppunt met van_label
+  // en het knooppunt met naar_label
+
+  dijkstra_tabel T(aantal_kn, zoek_knooppunt(van_label));
+
+  kortste_pad_t pad = { "NULL", 0 };
+  return pad; //todo: zou een kortste_pad_t moeten teruggeven
 }

@@ -4,14 +4,14 @@ struct Dijkstra_t {
 	int		vorig_kn;
 };
 
-class Dijkstra_tabel {
+class dijkstra_tabel {
 
 	private :
 		int			aantal_kol;
 		Dijkstra_t	kol [MAX_AANT_KN];
 
 	public :
-				Dijkstra_tabel (int arg_aantal, int van);
+				dijkstra_tabel (int arg_aantal, int van);
 		int		aantal_afgehandeld ();
 		bool	is_afgehandeld (int knooppunt);
 		int		min_len (int knooppunt);

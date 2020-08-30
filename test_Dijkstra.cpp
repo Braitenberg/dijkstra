@@ -5,10 +5,8 @@
 // Test programma voor class graaf_t
 #include <iostream>
 #include <string>
-using namespace std;
-
 #include "graaf_t.h"
-#include "Dijkstra_t.h"
+using namespace std;
 
 int main()
 {
@@ -24,7 +22,7 @@ int main()
 	G.print_graaf();
 
 	cout << "\nStart Dijkstra's algoritme van a naar c\n";
-	kortste_pad	= G.Dijkstra ("a", "c");
+	kortste_pad	= G.dijkstra ("a", "c");
 	cout << "Kortste pad:\t\t" << kortste_pad.pad << "\n";
 	cout << "Lengte van dit pad:\t" << kortste_pad.lengte << "\n";
 

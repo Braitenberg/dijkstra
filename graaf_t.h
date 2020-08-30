@@ -1,7 +1,7 @@
 #include <string>
 using namespace std;
 
-const int MAX_AANT_KN = 100;
+static const int MAX_AANT_KN = 100;
 const int ONEINDIG = 9999;
 
 struct kortste_pad_t {
@@ -25,5 +25,5 @@ class graaf_t {
 		void	voeg_kant_toe (string van_label, string naar_label, int gewicht);
 		int 	zoek_knooppunt (string arg_label);
 		void 	print_graaf ();
-		int Dijkstra (string van_label, string naar_label); //todo: zou een kortste_pad_t moeten teruggeven
+		kortste_pad_t dijkstra (string van_label, string naar_label); //todo: zou een kortste_pad_t moeten teruggeven
 };
