@@ -121,17 +121,17 @@ foutcode parse_regel(string arg_regel) {
 
 			case 1:
 				// voeg_knooppunt_toe aan graaf -rb
-				parse_knooppunt(arg);
+				error_no = parse_knooppunt(arg);
 				break;
 
 			case 2:
 				// voeg_kant_toe aan graaf -rb
-				parse_kant(arg);
+				error_no = parse_kant(arg);
 				break;
 
 			case 3:
 				// roep dijkstra aan op graaf -rb
-				parse_Dijkstra(arg);
+				error_no = parse_Dijkstra(arg);
 				break;
 
 			 case INVALID_KEYWORD_CODE:
